@@ -15,12 +15,12 @@ import de.mglaubitz.enumresources.EnumResources;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml", resourceDir = "src/test/res")
-public class EnumDimenResourcesTest {
+public class EnumColorResourcesTest {
 
     @Before
     public void setUp() {
         EnumResources.get(TestEnum.CONSTANT_1)
-                .assocDimension(R.dimen.test);
+                .assocColor(R.color.test);
     }
 
     @After
@@ -30,13 +30,13 @@ public class EnumDimenResourcesTest {
 
     @Test
     public void testDimenRes() {
-        Assert.assertEquals(R.dimen.test, EnumResources.get(TestEnum.CONSTANT_1).getDimensionRes());
+        Assert.assertEquals(R.color.test, EnumResources.get(TestEnum.CONSTANT_1).getColorRes());
     }
 
     @Test
     public void testDimen() {
         final Resources resources =  Robolectric.setupActivity(ContextActivity.class).getResources();
-        Assert.assertEquals(resources.getDimensionPixelSize(R.dimen.test), EnumResources.get(TestEnum.CONSTANT_1).getDimensionPixelSize(resources));
+        Assert.assertEquals(resources.getColor(R.color.test), EnumResources.get(TestEnum.CONSTANT_1).getColor(resources));
     }
 
     @Test
@@ -44,9 +44,9 @@ public class EnumDimenResourcesTest {
         EnumResources.reset();
 
         EnumResources.get(TestEnum.CONSTANT_1)
-                .assocDimension(R.dimen.test, TestEnum.Fields.FIELD_1);
+                .assocColor(R.color.test, TestEnum.Fields.FIELD_1);
 
-        Assert.assertEquals(R.dimen.test, EnumResources.get(TestEnum.CONSTANT_1).getDimensionRes(TestEnum.Fields.FIELD_1));
+        Assert.assertEquals(R.color.test, EnumResources.get(TestEnum.CONSTANT_1).getColorRes(TestEnum.Fields.FIELD_1));
     }
 
     @Test
@@ -54,11 +54,11 @@ public class EnumDimenResourcesTest {
         EnumResources.reset();
 
         EnumResources.get(TestEnum.CONSTANT_1)
-                .assocDimension(R.dimen.test, TestEnum.Fields.FIELD_1);
+                .assocColor(R.color.test, TestEnum.Fields.FIELD_1);
 
         final Resources resources =  Robolectric.setupActivity(ContextActivity.class).getResources();
-        Assert.assertEquals(resources.getDimensionPixelSize(R.dimen.test), EnumResources.get(TestEnum.CONSTANT_1)
-                .getDimensionPixelSize(resources, TestEnum.Fields.FIELD_1));
+        Assert.assertEquals(resources.getColor(R.color.test), EnumResources.get(TestEnum.CONSTANT_1)
+                .getColor(resources, TestEnum.Fields.FIELD_1));
     }
 
 }

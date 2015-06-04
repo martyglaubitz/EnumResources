@@ -5,7 +5,12 @@ package de.mglaubitz.enumresources.test;
  */
 enum TestEnum {
 
-    FIELD_1,
-    FIELD_2
+    CONSTANT_1,
+    CONSTANT_2;
+
+    public enum Fields {
+        FIELD_1,
+        FIELD_2
+    }
 
 }

@@ -23,7 +23,7 @@ import java.util.Map;
 public class EnumResources {
 
 	@SuppressWarnings("rawtypes")
-	private static final Map<Class<? extends Enum>, Map> MAP = new HashMap<>();
+	private static Map<Class<? extends Enum>, Map> MAP = new HashMap<>();
 
 	protected EnumResources() {
 		// visivility
@@ -44,6 +44,21 @@ public class EnumResources {
 		}
 
 		return result;
+	}
+
+    /**
+     * Clears all associations for the given enum.
+     * @param enumClass Type for which enum constants resources have been associated.
+     */
+	public static void reset(final Class<? extends Enum> enumClass) {
+		MAP.remove(enumClass);
+	}
+
+	/**
+	 * Clears ALL registered associations
+	 */
+	public static void reset() {
+		MAP = new HashMap<>();
 	}
 
 	public static class EnumAssociation {
