@@ -23,19 +23,15 @@ import java.util.Map;
 public class EnumResources {
 
 	@SuppressWarnings("rawtypes")
-	private static Map<Class<? extends Enum>, Map> MAP = new HashMap<>();
-
-	protected EnumResources() {
-		// visivility
-	}
+	private final Map<Class<? extends Enum>, Map> _map = new HashMap<>();
 
 	@SuppressWarnings("unchecked")
-	public static <T extends Enum<T>> EnumAssociation get(final T enumValue) {
+	public <T extends Enum<T>> EnumAssociation get(final T enumValue) {
 		final Class<T> tClass = (Class<T>)(Class<?>)enumValue.getClass();
 
-		Map<T,EnumAssociation> enumAssociationMap = MAP.get(tClass);
+		Map<T,EnumAssociation> enumAssociationMap = _map.get(tClass);
 		if (enumAssociationMap == null) {
-			MAP.put(tClass, enumAssociationMap = new EnumMap<>(tClass));
+			_map.put(tClass, enumAssociationMap = new EnumMap<>(tClass));
 		}
 
 		EnumAssociation result = enumAssociationMap.get(enumValue);
@@ -44,21 +40,6 @@ public class EnumResources {
 		}
 
 		return result;
-	}
-
-    /**
-     * Clears all associations for the given enum.
-     * @param enumClass Type for which enum constants resources have been associated.
-     */
-	public static void reset(final Class<? extends Enum> enumClass) {
-		MAP.remove(enumClass);
-	}
-
-	/**
-	 * Clears ALL registered associations
-	 */
-	public static void reset() {
-		MAP = new HashMap<>();
 	}
 
 	public static class EnumAssociation {
