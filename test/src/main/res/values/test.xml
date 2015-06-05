@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="test">777dp</dimen>
+    <integer name="test">777</integer>
     <color name="test">@android:color/holo_red_light</color>
+    <bool name="test">true</bool>
+
+    <string-array name="test_string_array">
+        <item>String 1</item>
+        <item>String 2</item>
+    </string-array>
+
+    <integer-array name="test_int_array">
+        <item>7</item>
+        <item>8</item>
+    </integer-array>
 </resources>

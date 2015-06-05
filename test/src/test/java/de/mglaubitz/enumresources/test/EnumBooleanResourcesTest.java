@@ -15,7 +15,7 @@ import de.mglaubitz.enumresources.EnumResources;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml", resourceDir = "src/test/res")
-public class EnumColorResourcesTest {
+public class EnumBooleanResourcesTest {
 
     private EnumResources _enumResources;
 
@@ -30,38 +30,38 @@ public class EnumColorResourcesTest {
     }
 
     @Test
-    public void testColorRes() {
+    public void testBooleanRes() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test);
+                .assocBoolean(R.bool.test);
 
-        Assert.assertEquals(R.color.test, _enumResources.get(TestEnum.CONSTANT_1).getColorRes());
+        Assert.assertEquals(R.bool.test, _enumResources.get(TestEnum.CONSTANT_1).getBooleanRes());
     }
 
     @Test
-    public void testColor() {
+    public void testBoolean() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test);
+                .assocBoolean(R.bool.test);
 
         final Resources resources =  Robolectric.setupActivity(ContextActivity.class).getResources();
-        Assert.assertEquals(resources.getColor(R.color.test), _enumResources.get(TestEnum.CONSTANT_1).getColor(resources));
+        Assert.assertEquals(resources.getBoolean(R.bool.test), _enumResources.get(TestEnum.CONSTANT_1).getBoolean(resources));
     }
 
     @Test
-    public void testColorResForField() {
+    public void testBooleanResForField() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test, TestEnum.Fields.FIELD_1);
+                .assocBoolean(R.bool.test, TestEnum.Fields.FIELD_1);
 
-        Assert.assertEquals(R.color.test, _enumResources.get(TestEnum.CONSTANT_1).getColorRes(TestEnum.Fields.FIELD_1));
+        Assert.assertEquals(R.bool.test, _enumResources.get(TestEnum.CONSTANT_1).getBooleanRes(TestEnum.Fields.FIELD_1));
     }
 
     @Test
-    public void testColorForField() {
+    public void testBooleanForField() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test, TestEnum.Fields.FIELD_1);
+                .assocBoolean(R.bool.test, TestEnum.Fields.FIELD_1);
 
         final Resources resources =  Robolectric.setupActivity(ContextActivity.class).getResources();
-        Assert.assertEquals(resources.getColor(R.color.test), _enumResources.get(TestEnum.CONSTANT_1)
-                .getColor(resources, TestEnum.Fields.FIELD_1));
+        Assert.assertEquals(resources.getBoolean(R.bool.test), _enumResources.get(TestEnum.CONSTANT_1)
+                .getBoolean(resources, TestEnum.Fields.FIELD_1));
     }
 
 }

@@ -8,6 +8,7 @@ import android.support.annotation.BoolRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -54,7 +55,9 @@ public class EnumResources {
 
 		private static final int DIMENSION_FIELD_INDEX          = 4;
 
-		private static final int STRING_FIELD_INDEX             = 5;
+        private static final int INTEGER_FIELD_INDEX            = 5;
+
+		private static final int STRING_FIELD_INDEX             = 6;
 
 
 
@@ -128,6 +131,17 @@ public class EnumResources {
 			return this;
 		}
 
+        public EnumAssociation assocInteger(@IntegerRes final int integerRes) {
+            _associations.put(INTEGER_FIELD_INDEX, integerRes);
+
+            return this;
+        }
+
+        public EnumAssociation assocInteger(@IntegerRes final int integerRes, final Enum<?> enumValue) {
+            _enumAssociations.put(enumValue.ordinal(), integerRes);
+
+            return this;
+        }
 
 		public EnumAssociation assocString(@StringRes final int stringRes) {
 			_associations.put(STRING_FIELD_INDEX, stringRes);
@@ -180,11 +194,13 @@ public class EnumResources {
 
 		@Nullable
 		public Drawable getDrawable(final Resources resources) {
+			//noinspection deprecation
 			return resources.getDrawable(_associations.get(DRAWABLE_FIELD_INDEX));
 		}
 
 		@Nullable
 		public Drawable getDrawable(final Resources resources, final Enum<?> enumValue) {
+			//noinspection deprecation
 			return resources.getDrawable(_enumAssociations.get(enumValue.ordinal()));
 		}
 
@@ -198,6 +214,22 @@ public class EnumResources {
 		}
 
 
+		public int getInteger(final Resources resources) {
+			return resources.getInteger(_associations.get(INTEGER_FIELD_INDEX));
+		}
+
+		public int getInteger(final Resources resources, final Enum<?> enumValue) {
+			return resources.getInteger(_enumAssociations.get(enumValue.ordinal()));
+		}
+
+		@IntegerRes public int getIntegerRes() {
+			return _associations.get(INTEGER_FIELD_INDEX);
+		}
+
+		@IntegerRes public int getIntegerRes(final Enum<?> enumValue) {
+			return _enumAssociations.get(enumValue.ordinal());
+		}
+
 		@NonNull
 		public int[] getIntArray(final Resources resources) {
 			return resources.getIntArray(_associations.get(ARRAY_FIELD_INDEX));
@@ -209,19 +241,13 @@ public class EnumResources {
 		}
 
 
-		@ArrayRes public int getIntArrayRes() {
+		@ArrayRes public int getArrayRes() {
 			return _associations.get(ARRAY_FIELD_INDEX);
 		}
 
-		@ArrayRes public int getIntArrayRes(final Enum<?> enumValue) {
+		@ArrayRes public int getArrayRes(final Enum<?> enumValue) {
 			return _enumAssociations.get(enumValue.ordinal());
 		}
-
-
-		@AnyRes public int getResource(final Enum<?> enumValue) {
-			return _enumAssociations.get(enumValue.ordinal());
-		}
-
 
 		@NonNull
 		public String getString(final Resources resources) {

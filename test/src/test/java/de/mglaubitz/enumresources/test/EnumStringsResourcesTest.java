@@ -15,7 +15,7 @@ import de.mglaubitz.enumresources.EnumResources;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, manifest = "src/main/AndroidManifest.xml", resourceDir = "src/test/res")
-public class EnumColorResourcesTest {
+public class EnumStringsResourcesTest {
 
     private EnumResources _enumResources;
 
@@ -30,38 +30,38 @@ public class EnumColorResourcesTest {
     }
 
     @Test
-    public void testColorRes() {
+    public void testStringRes() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test);
+                .assocString(R.string.hello_world);
 
-        Assert.assertEquals(R.color.test, _enumResources.get(TestEnum.CONSTANT_1).getColorRes());
+        Assert.assertEquals(R.string.hello_world, _enumResources.get(TestEnum.CONSTANT_1).getStringRes());
     }
 
     @Test
-    public void testColor() {
+    public void testString() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test);
+                .assocString(R.string.hello_world);
 
         final Resources resources =  Robolectric.setupActivity(ContextActivity.class).getResources();
-        Assert.assertEquals(resources.getColor(R.color.test), _enumResources.get(TestEnum.CONSTANT_1).getColor(resources));
+        Assert.assertEquals(resources.getString(R.string.hello_world), _enumResources.get(TestEnum.CONSTANT_1).getString(resources));
     }
 
     @Test
-    public void testColorResForField() {
+    public void testStringResForField() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test, TestEnum.Fields.FIELD_1);
+                .assocString(R.string.hello_world, TestEnum.Fields.FIELD_1);
 
-        Assert.assertEquals(R.color.test, _enumResources.get(TestEnum.CONSTANT_1).getColorRes(TestEnum.Fields.FIELD_1));
+        Assert.assertEquals(R.string.hello_world, _enumResources.get(TestEnum.CONSTANT_1).getStringRes(TestEnum.Fields.FIELD_1));
     }
 
     @Test
-    public void testColorForField() {
+    public void testStringForField() {
         _enumResources.get(TestEnum.CONSTANT_1)
-                .assocColor(R.color.test, TestEnum.Fields.FIELD_1);
+                .assocString(R.string.hello_world, TestEnum.Fields.FIELD_1);
 
         final Resources resources =  Robolectric.setupActivity(ContextActivity.class).getResources();
-        Assert.assertEquals(resources.getColor(R.color.test), _enumResources.get(TestEnum.CONSTANT_1)
-                .getColor(resources, TestEnum.Fields.FIELD_1));
+        Assert.assertEquals(resources.getString(R.string.hello_world), _enumResources.get(TestEnum.CONSTANT_1)
+                .getString(resources, TestEnum.Fields.FIELD_1));
     }
 
 }
