@@ -41,4 +41,4 @@ void onFilterChanged(final FeedContentMode feedContentMode) {
         jcenter()
     }
     
-    compile 'de.mglaubitz:EnumResources:1.0.1'
+    compile 'de.mglaubitz:EnumResources:1.0.2'
