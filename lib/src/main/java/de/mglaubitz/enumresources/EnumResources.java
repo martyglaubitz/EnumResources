@@ -2,13 +2,13 @@ package de.mglaubitz.enumresources;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.AnyRes;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.BoolRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntegerRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -57,7 +57,9 @@ public class EnumResources {
 
         private static final int INTEGER_FIELD_INDEX            = 5;
 
-		private static final int STRING_FIELD_INDEX             = 6;
+		private static final int LAYOUT_FIELD_INDEX             = 6;
+
+		private static final int STRING_FIELD_INDEX             = 7;
 
 
 
@@ -142,6 +144,18 @@ public class EnumResources {
 
             return this;
         }
+
+		public EnumAssociation assocLayout(@LayoutRes final int layoutRes) {
+			_associations.put(LAYOUT_FIELD_INDEX, layoutRes);
+
+			return this;
+		}
+
+		public EnumAssociation assocLayout(@LayoutRes final int layoutRes, final Enum<?> enumValue) {
+			_enumAssociations.put(enumValue.ordinal(), layoutRes);
+
+			return this;
+		}
 
 		public EnumAssociation assocString(@StringRes final int stringRes) {
 			_associations.put(STRING_FIELD_INDEX, stringRes);
@@ -246,6 +260,14 @@ public class EnumResources {
 		}
 
 		@ArrayRes public int getArrayRes(final Enum<?> enumValue) {
+			return _enumAssociations.get(enumValue.ordinal());
+		}
+
+		@LayoutRes public int getLayoutRes() {
+			return _associations.get(LAYOUT_FIELD_INDEX);
+		}
+
+		@LayoutRes public int getLayoutRes(final Enum<?> enumValue) {
 			return _enumAssociations.get(enumValue.ordinal());
 		}
 
